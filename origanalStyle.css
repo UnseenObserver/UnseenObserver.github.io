@@ -1,0 +1,339 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    display: block; /* Change from flex to block to allow content to scroll */
+    overflow-y: auto; /* Ensures vertical scrolling is enabled */
+}
+
+/* Main content and body setup */
+body {
+    background-color: #190112;
+    color: #e0e0e0;
+}
+
+/* Content area setup */
+.content {
+    flex: 1; /* Takes up available space */
+    padding: 20px;
+}
+
+/* Glassy Footer styling */
+.footer {
+    background: rgba(255, 182, 193, 0.3); /* Light pink with transparency */
+    backdrop-filter: blur(10px); /* Glass effect with blur */
+    color: #e0e0e0; /* Light text color */
+    text-align: center; /* Center align text */
+    padding: 10px 20px; /* Adjust padding if needed */
+    width: 95%; /* Full width */
+    border-top-left-radius: 15px;  /* Top-left corner */
+    border-top-right-radius: 15px; /* Top-right corner */
+    border-bottom-left-radius: 0;  /* Bottom-left corner (no radius) */
+    border-bottom-right-radius: 0px; /* Bottom-right corner */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Slight shadow for depth */
+    flex-shrink: 0; /* Prevent footer from shrinking */
+    margin: 0 auto;
+}
+
+.footer a {
+  color: #ffffff;
+  display: block;
+}
+
+/* Sidebar */
+.sidebar {
+    background: rgba(40, 29, 61, 0.5); /* Semi-transparent background */
+    width: 250px;
+    padding: 20px;
+    color: #e0e0e0;
+    position: fixed;
+    left: -230px; /* Move it further left to hide completely */
+    top: 20px; /* Add some top margin */
+    height: calc(100vh - 40px); /* Adjust height to account for top and bottom margin */
+    z-index: 12;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: left 0.3s ease;
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+    backdrop-filter: blur(10px); /* Blur effect for glassy appearance */
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+}
+
+/* Button styles */
+.sidebar-button {
+    background-color: rgba(58, 9, 73, 0.6); /* Semi-transparent button background */
+    color: #e0e0e0;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px 0;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+}
+
+.sidebar-button:hover {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)); /* Gradient background */ /* Slightly darker on hover */
+}
+
+.sidebar.open {
+    left: 20px;
+}
+
+/* Hover area to trigger sidebar */
+.hover-area {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px; /* Width of the indicator */
+    height: 100vh; /* Full viewport height */
+    z-index: 10;
+    cursor: pointer; /* Cursor changes to indicate interactivity */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Custom Scrollbar for WebKit browsers */
+::-webkit-scrollbar {
+    width: 12px; /* Width of the scrollbar */
+    height: 12px; /* Height of the scrollbar (for horizontal scrollbar) */
+}
+
+::-webkit-scrollbar-track {
+    background: linear-gradient(
+        to right,  
+        rgba(0, 0, 0, 0.2) 50%,  
+        rgba(0, 0, 0, 0.2) 40px, 
+        rgba(0, 0, 0, 0.2) 100%
+    ); /* Gradient fading away from the scrollbar */
+    border-radius: 12px; /* Rounded corners for the track */
+    padding: 5px; /* Padding to ensure track is wider than thumb */
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(112, 70, 122, 0.8); /* Light grey color for the thumb */
+    border-radius: 12px; /* Rounded corners for the thumb */
+    border: 4px solid rgba(0, 0, 0, 0); /* Transparent border to ensure track around the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(64, 40, 70, 0.6); /* Slightly darker grey on hover */
+}
+
+/* Image container with glassy border */
+.image-container {
+    float: right; /* Floats the image to the right of the text */
+    margin-left: 20px; /* Adds space between the image and text */
+    padding: 10px; /* Padding will create space for the border */
+    border-radius: 15px; /* Optional rounded corners */
+    background: rgba(211, 211, 211, 0.3); /* Light grey with transparency */
+    backdrop-filter: blur(10px); /* Glassy effect with blur */
+    -webkit-backdrop-filter: blur(10px); /* Safari support for glassy effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for added depth */
+    display: inline-block; /* Ensure the container behaves like a block element */
+    max-width: 50%; /* The container will take up to 50% of the available width */
+}
+
+/* Image styling */
+.auto-image {
+    max-width: 100%; /* Ensure the image fits within its container */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px; /* Optional: rounded corners for the image itself */
+    display: block; /* Prevent the image from displaying inline with text */
+}
+
+/* Social Media Container */
+.social-media-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows buttons to wrap to the next line if necessary */
+    justify-content: center; /* Center buttons horizontally */
+    gap: 10px; /* Space between buttons */
+    margin: 20px 0; /* Space around the container */
+}
+
+/* Social Media Container */
+.social-media-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows buttons to wrap to the next line if necessary */
+    justify-content: center; /* Center buttons horizontally */
+    gap: 10px; /* Space between buttons */
+    margin: 20px 0; /* Space around the container */
+}
+
+/* Social Media Button Styling */
+.social-media-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px; /* Width of the button */
+    height: 60px; /* Height of the button */
+    border-radius: 30px; /* Circular shape */
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.3); /* Glassy background color with transparency */
+    backdrop-filter: blur(20px); /* Glass effect with blur */
+    -webkit-backdrop-filter: blur(10px); /* Safari support for glassy effect */
+    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.4); /* Light shadow for depth */
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s;
+    overflow: hidden; /* Ensures the image doesn't overflow the button */
+}
+
+/* Ensure the image is on top of the texture */
+.social-media-button img {
+    width: 100%; /* Make the image fill the button */
+    height: 100%; /* Make the image fill the button */
+    object-fit: contain; /* Ensure the image scales correctly */
+    position: relative;
+    z-index: 1; /* Place the image above the texture */
+}
+
+/* Example hover effect */
+.social-media-button:hover {
+  
+}
+
+.social-media-button:hover img {
+  
+}
+
+.social-media-button.linktree {
+  
+}
+
+.social-media-button.linkedin {
+  
+}
+
+.social-media-button.email {
+  
+}
+
+/* Main content container */
+.main-content-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    margin-left: 40px;/* Adjust margin to account for hover area */
+    margin-right: 20px;
+    justify-content: space-between;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    max-width: 100%;
+    color: #e0e0e0;
+    flex-wrap: wrap; /* Allow wrapping if necessary */
+    position: relative; /* Ensure relative positioning for children like images */
+    overflow: visible; /* Ensure content can overflow */
+}
+
+.main-content {
+    background-color: #2c2c2c;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    line-height: 1.6;
+}
+
+.main-content h1 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #e0e0e0;
+}
+
+.main-content h2 {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-size: 22px;
+    color: #e0e0e0;
+}
+
+.main-content p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+.main-content ul {
+    margin-bottom: 15px;
+    margin-left: 20px;
+}
+
+.main-content li {
+    margin-bottom: 5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+    
+    .image-container {
+        float: none; /* Disable floating on smaller screens */
+        display: block; /* Ensure it's block-level */
+        margin: 0 auto 20px; /* Center the image */
+        width: 100%; /* Full width on smaller screens */
+    }
+    
+    .footer {
+        padding: 20px 10px; /* Adjust padding for smaller screens */
+    }
+
+    .main-content-container {
+        padding: 20px;
+    }
+
+    .sidebar {
+        width: 200px;
+        left: -220px;
+    }
+
+    .hover-area:hover + .sidebar {
+        left: 10px;
+    }
+}
+
+#game-container {
+    position: relative;
+    text-align: center;
+}
+
+#color-box {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    background-color: red;
+    cursor: pointer;
+    border-radius: 10px;
+    display: none; /* Hide the color box initially */
+}
+
+#score {
+    margin-top: 120px;
+    font-size: 24px;
+}
+
+#start-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+#start-button:hover {
+    background-color: #2980b9;
+}
