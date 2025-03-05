@@ -27,6 +27,7 @@ body {
 
 /* Glassy Footer styling */
 .footer {
+    position: fixed;
     background: rgba(255, 182, 193, 0.3); /* Light pink with transparency */
     backdrop-filter: blur(10px); /* Glass effect with blur */
     color: #e0e0e0; /* Light text color */
@@ -39,7 +40,11 @@ body {
     border-bottom-right-radius: 0px; /* Bottom-right corner */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Slight shadow for depth */
     flex-shrink: 0; /* Prevent footer from shrinking */
-    margin: 0 auto;
+    margin-left: 2.5%;
+    margin-top: auto;
+    margin-bottom: 0;
+    bottom: 0;
+    
 }
 
 .footer a {
@@ -141,7 +146,7 @@ body {
     -webkit-backdrop-filter: blur(10px); /* Safari support for glassy effect */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for added depth */
     display: inline-block; /* Ensure the container behaves like a block element */
-    max-width: 50%; /* The container will take up to 50% of the available width */
+    max-width: 30%; /* The container will take up to 50% of the available width */
 }
 
 /* Image styling */
