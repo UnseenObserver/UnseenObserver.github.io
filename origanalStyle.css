@@ -39,7 +39,10 @@ body {
     border-bottom-right-radius: 0px; /* Bottom-right corner */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Slight shadow for depth */
     flex-shrink: 0; /* Prevent footer from shrinking */
-    margin: 0 auto;
+    margin-left: 2.5%;
+			margin-right: 2.5%;
+			margin-bottom: 0;
+			bottom: 0;
 }
 
 .footer a {
