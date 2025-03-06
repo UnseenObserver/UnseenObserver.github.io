@@ -1,4 +1,7 @@
-/* General reset */
+/* Back to front */
+
+
+/* General */
 * {
     margin: 0;
     padding: 0;
@@ -13,6 +16,43 @@ html, body {
     overflow-y: auto; /* Ensures vertical scrolling is enabled */
 }
 
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+    
+    .image-container {
+        float: none; /* Disable floating on smaller screens */
+        display: block; /* Ensure it's block-level */
+        margin: 0 auto 20px; /* Center the image */
+        width: 100%; /* Full width on smaller screens */
+    }
+    
+    .footer {
+        padding: 20px 10px; /* Adjust padding for smaller screens */
+    }
+
+    .main-content-container {
+        padding: 20px;
+    }
+
+    .sidebar {
+        width: 200px;
+        left: -220px;
+    }
+
+    .hover-area:hover + .sidebar {
+        left: 10px;
+    }
+}
+
+/* End */
+
+
+
+/* Main body and Stucture */
+
 /* Main content and body setup */
 body {
     background-color: #190112;
@@ -25,31 +65,38 @@ body {
     padding: 20px;
 }
 
-/* Glassy Footer styling */
-.footer {
-    position: fixed;
-    background: rgba(255, 182, 193, 0.3); /* Light pink with transparency */
-    backdrop-filter: blur(10px); /* Glass effect with blur */
-    color: #e0e0e0; /* Light text color */
-    text-align: center; /* Center align text */
-    padding: 10px 20px; /* Adjust padding if needed */
-    width: 95%; /* Full width */
-    border-top-left-radius: 15px;  /* Top-left corner */
-    border-top-right-radius: 15px; /* Top-right corner */
-    border-bottom-left-radius: 0;  /* Bottom-left corner (no radius) */
-    border-bottom-right-radius: 0px; /* Bottom-right corner */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Slight shadow for depth */
-    flex-shrink: 0; /* Prevent footer from shrinking */
-    margin-left: 2.5%;
-    margin-top: auto;
-    margin-bottom: 0;
-    bottom: 0;
+.main-content {
+    background-color: #2c2c2c;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    line-height: 1.6;
     
 }
 
-.footer a {
-  color: #ffffff;
-  display: block;
+/* End */
+
+
+
+/* Parts of the site */
+
+/* Main content container */
+.main-content-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    margin-left: 40px;/* Adjust margin to account for hover area */
+    margin-right: 20px;
+    margin-top: 20px;
+    justify-content: space-between;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    max-width: 100%;
+    color: #e0e0e0;
+    flex-wrap: wrap; /* Allow wrapping if necessary */
+    position: relative; /* Ensure relative positioning for children like images */
+    overflow: visible; /* Ensure content can overflow */
 }
 
 /* Sidebar */
@@ -73,39 +120,26 @@ body {
     -webkit-backdrop-filter: blur(10px); /* Safari support */
 }
 
-/* Button styles */
-.sidebar-button {
-    background-color: rgba(58, 9, 73, 0.6); /* Semi-transparent button background */
-    color: #e0e0e0;
-    border: none;
-    padding: 10px 20px;
-    margin: 5px 0;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-    text-decoration: none;
-    text-align: center;
-}
-
-.sidebar-button:hover {
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)); /* Gradient background */ /* Slightly darker on hover */
-}
-
-.sidebar.open {
-    left: 20px;
-}
-
-/* Hover area to trigger sidebar */
-.hover-area {
+/* Glassy Footer styling */
+.footer {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 20px; /* Width of the indicator */
-    height: 100vh; /* Full viewport height */
-    z-index: 10;
-    cursor: pointer; /* Cursor changes to indicate interactivity */
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    background: rgba(255, 182, 193, 0.3); /* Light pink with transparency */
+    backdrop-filter: blur(10px); /* Glass effect with blur */
+    color: #e0e0e0; /* Light text color */
+    text-align: center; /* Center align text */
+    padding: 10px 20px; /* Adjust padding if needed */
+    width: 95%; /* Full width */
+    border-top-left-radius: 15px;  /* Top-left corner */
+    border-top-right-radius: 15px; /* Top-right corner */
+    border-bottom-left-radius: 0;  /* Bottom-left corner (no radius) */
+    border-bottom-right-radius: 0px; /* Bottom-right corner */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Slight shadow for depth */
+    flex-shrink: 0; /* Prevent footer from shrinking */
+    margin-left: 2.5%;
+    margin-top: auto;
+    margin-bottom: 0;
+    bottom: 0;
+    
 }
 
 /* Custom Scrollbar for WebKit browsers */
@@ -134,6 +168,47 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(64, 40, 70, 0.6); /* Slightly darker grey on hover */
 }
+/* End */
+
+/* End */
+
+
+
+/* Content Writing */
+
+.main-content h1 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #e0e0e0;
+}
+
+.main-content h2 {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-size: 22px;
+    color: #e0e0e0;
+}
+
+.main-content p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+.main-content ul {
+    margin-bottom: 15px;
+    margin-left: 20px;
+}
+
+.main-content li {
+    margin-bottom: 5px;
+}
+
+/* End */
+
+
+
+/* Content Items */
 
 /* Image container with glassy border */
 .image-container {
@@ -202,112 +277,57 @@ body {
     z-index: 1; /* Place the image above the texture */
 }
 
-/* Example hover effect */
-.social-media-button:hover {
-  
-}
+/* End */
 
-.social-media-button:hover img {
-  
-}
 
-.social-media-button.linktree {
-  
-}
 
-.social-media-button.linkedin {
-  
-}
+/* Sidebar Items and Behavior */
 
-.social-media-button.email {
-  
-}
-
-/* Main content container */
-.main-content-container {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    margin-left: 40px;/* Adjust margin to account for hover area */
-    margin-right: 20px;
-    justify-content: space-between;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    max-width: 100%;
+/* Button styles */
+.sidebar-button {
+    background-color: rgba(58, 9, 73, 0.6); /* Semi-transparent button background */
     color: #e0e0e0;
-    flex-wrap: wrap; /* Allow wrapping if necessary */
-    position: relative; /* Ensure relative positioning for children like images */
-    overflow: visible; /* Ensure content can overflow */
-}
-
-.main-content {
-    background-color: #2c2c2c;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    width: 100%;
-    line-height: 1.6;
-}
-
-.main-content h1 {
-    margin-bottom: 20px;
-    font-size: 28px;
-    color: #e0e0e0;
-}
-
-.main-content h2 {
-    margin-top: 20px;
-    margin-bottom: 15px;
-    font-size: 22px;
-    color: #e0e0e0;
-}
-
-.main-content p {
-    margin-bottom: 15px;
-    line-height: 1.6;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px 0;
+    border-radius: 4px;
+    cursor: pointer;
     font-size: 16px;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    text-align: center;
 }
 
-.main-content ul {
-    margin-bottom: 15px;
-    margin-left: 20px;
+.sidebar-button:hover {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)); /* Gradient background */ /* Slightly darker on hover */
 }
 
-.main-content li {
-    margin-bottom: 5px;
+.sidebar.open {
+    left: 20px;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    body {
-        flex-direction: column;
-    }
-    
-    .image-container {
-        float: none; /* Disable floating on smaller screens */
-        display: block; /* Ensure it's block-level */
-        margin: 0 auto 20px; /* Center the image */
-        width: 100%; /* Full width on smaller screens */
-    }
-    
-    .footer {
-        padding: 20px 10px; /* Adjust padding for smaller screens */
-    }
-
-    .main-content-container {
-        padding: 20px;
-    }
-
-    .sidebar {
-        width: 200px;
-        left: -220px;
-    }
-
-    .hover-area:hover + .sidebar {
-        left: 10px;
-    }
+/* Hover area to trigger sidebar */
+.hover-area {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px; /* Width of the indicator */
+    height: 100vh; /* Full viewport height */
+    z-index: 10;
+    cursor: pointer; /* Cursor changes to indicate interactivity */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
 }
 
+/* End */
+
+
+
+
+
+
+/* Game Stuff */
+
+/* Game Container */
 #game-container {
     position: relative;
     text-align: center;
@@ -342,3 +362,5 @@ body {
 #start-button:hover {
     background-color: #2980b9;
 }
+
+/* End */
