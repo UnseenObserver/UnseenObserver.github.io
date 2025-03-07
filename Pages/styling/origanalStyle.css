@@ -89,9 +89,10 @@ body {
     margin-left: 40px;/* Adjust margin to account for hover area */
     margin-right: 20px;
     margin-top: 20px;
+    margin-bottom: 50px;
     justify-content: space-between;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3px);
     max-width: 100%;
     color: #e0e0e0;
     flex-wrap: wrap; /* Allow wrapping if necessary */
@@ -127,7 +128,7 @@ body {
     backdrop-filter: blur(10px); /* Glass effect with blur */
     color: #e0e0e0; /* Light text color */
     text-align: center; /* Center align text */
-    padding: 10px 20px; /* Adjust padding if needed */
+    padding: 10px; /* Adjust padding if needed */
     width: 95%; /* Full width */
     border-top-left-radius: 15px;  /* Top-left corner */
     border-top-right-radius: 15px; /* Top-right corner */
