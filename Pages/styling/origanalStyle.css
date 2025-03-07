@@ -89,7 +89,7 @@ body {
     margin-left: 40px;/* Adjust margin to account for hover area */
     margin-right: 20px;
     margin-top: 20px;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
     justify-content: space-between;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3px);
@@ -130,6 +130,7 @@ body {
     text-align: center; /* Center align text */
     padding: 10px; /* Adjust padding if needed */
     width: 95%; /* Full width */
+    height: 30px;
     border-top-left-radius: 15px;  /* Top-left corner */
     border-top-right-radius: 15px; /* Top-right corner */
     border-bottom-left-radius: 0;  /* Bottom-left corner (no radius) */
@@ -137,7 +138,6 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Slight shadow for depth */
     flex-shrink: 0; /* Prevent footer from shrinking */
     margin-left: 2.5%;
-    margin-top: auto;
     margin-bottom: 0;
     bottom: 0;
     
