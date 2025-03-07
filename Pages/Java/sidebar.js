@@ -26,41 +26,60 @@ function toggleSidebar() {
 }
 
 // --- Mouse Events (for desktop) ---
-// Open sidebar on mouse enter of the hover area
+// Open sidebar when the mouse enters the hover area
 hoverArea.addEventListener('mouseenter', () => {
     openSidebar();
 });
 
-// Optionally, close sidebar when the mouse leaves the hover area
+// Optionally, close sidebar when the mouse leaves the hover area.
+// You may adjust this behavior depending on whether you want manual click/touch to “lock” the sidebar open.
 hoverArea.addEventListener('mouseleave', () => {
-    // This check can be adjusted depending on your desired behavior;
-    // here we close only if not manually opened via click/touch.
+    // Here we check if the sidebar is not already toggled open manually.
     if (!isSidebarOpen) {
         closeSidebar();
     }
 });
 
-// Keep sidebar open when hovering over the sidebar itself
+// Keep the sidebar open when hovering over it.
 sidebar.addEventListener('mouseenter', () => {
     openSidebar();
 });
 
-// Close sidebar when leaving the sidebar, if not hovering over the hover area
+// Close sidebar when leaving the sidebar itself.
 sidebar.addEventListener('mouseleave', () => {
     closeSidebar();
 });
 
 // --- Click and Touch Events (for mobile/touch devices) ---
-// Add click event listeners to toggle the sidebar
+// Toggle the sidebar when clicking the hover area or the sidebar (including any buttons within it)
 hoverArea.addEventListener('click', toggleSidebar);
 sidebar.addEventListener('click', toggleSidebar);
 
-// Add touch event listeners to improve touch responsiveness
+// Add touch event listeners to improve touch responsiveness.
+// Using e.preventDefault() helps prevent the simulated mouse events on touch devices.
 hoverArea.addEventListener('touchstart', function(e) {
-    e.preventDefault(); // Prevent simulated mouse events
+    e.preventDefault();
     toggleSidebar();
 });
 sidebar.addEventListener('touchstart', function(e) {
     e.preventDefault();
     toggleSidebar();
+});
+
+// --- Global Event Listeners to Close Sidebar on Outside Click/Touch ---
+// This listener checks for any click outside of the sidebar and hover area,
+// and if the sidebar is open, it will close it.
+document.addEventListener('click', function(e) {
+    // If the sidebar is open and the click target is NOT within the sidebar or hover area,
+    // then close the sidebar.
+    if (isSidebarOpen && !sidebar.contains(e.target) && !hoverArea.contains(e.target)) {
+        closeSidebar();
+    }
+});
+
+// Similarly, for touch events on mobile devices.
+document.addEventListener('touchstart', function(e) {
+    if (isSidebarOpen && !sidebar.contains(e.target) && !hoverArea.contains(e.target)) {
+        closeSidebar();
+    }
 });
