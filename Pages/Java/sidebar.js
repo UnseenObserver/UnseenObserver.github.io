@@ -16,13 +16,25 @@ function closeSidebar() {
     isSidebarOpen = false;
 }
 
-// When mouse enters the hover area
+// Function to toggle the sidebar (used for click and touch events)
+function toggleSidebar() {
+    if (isSidebarOpen) {
+        closeSidebar();
+    } else {
+        openSidebar();
+    }
+}
+
+// --- Mouse Events (for desktop) ---
+// Open sidebar on mouse enter of the hover area
 hoverArea.addEventListener('mouseenter', () => {
     openSidebar();
 });
 
-// When mouse leaves the hover area, close if not over sidebar
+// Optionally, close sidebar when the mouse leaves the hover area
 hoverArea.addEventListener('mouseleave', () => {
+    // This check can be adjusted depending on your desired behavior;
+    // here we close only if not manually opened via click/touch.
     if (!isSidebarOpen) {
         closeSidebar();
     }
@@ -33,7 +45,22 @@ sidebar.addEventListener('mouseenter', () => {
     openSidebar();
 });
 
-// Close sidebar when leaving the sidebar, if not hovering over hover-area
+// Close sidebar when leaving the sidebar, if not hovering over the hover area
 sidebar.addEventListener('mouseleave', () => {
     closeSidebar();
+});
+
+// --- Click and Touch Events (for mobile/touch devices) ---
+// Add click event listeners to toggle the sidebar
+hoverArea.addEventListener('click', toggleSidebar);
+sidebar.addEventListener('click', toggleSidebar);
+
+// Add touch event listeners to improve touch responsiveness
+hoverArea.addEventListener('touchstart', function(e) {
+    e.preventDefault(); // Prevent simulated mouse events
+    toggleSidebar();
+});
+sidebar.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    toggleSidebar();
 });
