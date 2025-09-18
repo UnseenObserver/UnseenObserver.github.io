@@ -38,10 +38,9 @@
           <div style="flex:1;min-width:0">
             <div style="display:flex;align-items:center;justify-content:space-between">
               <div>
-                <div class="repo-name">${escapeHtml(data.name)}</div>
+                <div class="repo-name" title="${escapeHtml(data.name)}" aria-label="${escapeHtml(data.name)}">${escapeHtml(data.name)}</div>
                 <div class="owner">${escapeHtml(ownerLogin)}</div>
               </div>
-              <div style="font-size:12px;color:var(--muted)"><a href="${data.html_url}" target="_blank" style="color:var(--muted);text-decoration:none">View</a></div>
             </div>
             <div class="desc">${desc}</div>
           </div>
@@ -52,6 +51,15 @@
           <div title="Forks">⑂ ${forks}</div>
         </div>
       `;
+      // Make the entire card clickable and keyboard-accessible
+      (function makeCardClickable(c, url){
+        c.setAttribute('role','link');
+        c.setAttribute('tabindex','0');
+        c.addEventListener('click', ()=> window.open(url, '_blank'));
+        c.addEventListener('keydown', (e)=>{
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); window.open(url, '_blank'); }
+        });
+      })(card, data.html_url);
     } catch (err) {
       card.innerHTML = '<div style="color:#f88">Network error</div>';
       console.error(err);

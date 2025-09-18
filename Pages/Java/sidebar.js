@@ -83,3 +83,18 @@ document.addEventListener('touchstart', function(e) {
         closeSidebar();
     }
 });
+
+// Hide 'Contact Me' footer link only when on the contact page itself
+document.addEventListener('DOMContentLoaded', function() {
+    try {
+        const isContactPage = location.pathname.includes('senWebContact.html') || location.href.includes('senWebContact.html');
+        if (!isContactPage) return; // only hide on the contact page
+        const footerLinks = document.querySelectorAll('.footer a[href$="senWebContact.html"]');
+        footerLinks.forEach(a => {
+            a.style.display = 'none';
+            a.setAttribute('aria-hidden', 'true');
+        });
+    } catch (err) {
+        console.error('footer link cleanup failed', err);
+    }
+});
