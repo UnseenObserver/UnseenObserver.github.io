@@ -233,6 +233,137 @@ body {
     display: block; /* Prevent the image from displaying inline with text */
 }
 
+/* Photo card: image on left, metadata on right */
+.photo-card {
+    /* Use grid so thumbnail column is fixed and meta fills remaining space */
+    --thumb-width: 240px; /* default thumbnail column width */
+    display: grid;
+    grid-template-columns: var(--thumb-width) 1fr;
+    gap: 16px;
+    align-items: start;
+    width: 100%;
+    max-width: none;
+    margin-top: 0;
+    padding: 14px;
+    /* keep cards at a reasonable minimum width to avoid very long text lines */
+    min-width: calc(var(--card-min-width, 300px) - 24px);
+    background: rgba(40, 29, 61, 0.45);
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Gallery container: allow cards to wrap into columns */
+.photo-gallery {
+    display: grid;
+    gap: 18px;
+    /* configurable minimum card width to avoid overly wide text lines */
+    --card-min-width: 300px;
+    grid-template-columns: repeat(auto-fit, minmax(var(--card-min-width), 1fr));
+    align-items: start;
+}
+
+.photo-card__image {
+    /* make the image column fill the thumbnail grid column */
+    width: 100%;
+    height: 100%;
+    min-width: 120px;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+}
+
+.photo-card__meta {
+    min-width: 0;
+    color: #e0e0e0;
+}
+
+/* Ensure all text in the meta area wraps and doesn't overflow */
+.photo-card__meta, .photo-card__meta * {
+    overflow-wrap: anywhere; /* break long words/filenames */
+    word-break: break-word;
+    hyphens: auto;
+}
+
+/* Specifically ensure filename and title can wrap instead of overflowing */
+.photo-title, .photo-filename {
+    overflow-wrap: anywhere;
+    word-wrap: break-word;
+}
+
+.photo-title {
+    font-size: 16px; /* smaller title */
+    margin-bottom: 6px;
+}
+
+.photo-description {
+    margin-bottom: 8px;
+    color: #dcdcdc;
+    font-size: 13px; /* reduced description size */
+}
+
+.photo-location, .photo-filename {
+    margin-bottom: 6px;
+    color: #cfcfe0;
+    font-size: 12px; /* compact metadata text */
+}
+
+/* Compact modifier: for denser grids */
+.photo-card--compact {
+    max-width: 520px;
+    padding: 10px;
+}
+
+/* Hover and focus styles to add subtle lift */
+.photo-card:hover, .photo-card:focus-within {
+    transform: translateY(-6px);
+    transition: transform 180ms ease, box-shadow 200ms ease;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.55);
+}
+
+/* Make image-container blend into card background */
+.photo-card .image-container {
+    background: transparent; /* remove separate background so the unified card looks whole */
+    padding: 0; /* image should reach card padding boundaries */
+    border-radius: 8px;
+    box-shadow: none;
+    margin-left: 0; /* override global image-container margin */
+    max-width: none; /* allow grid to size the image column */
+    flex: 0 0 auto; /* prevent inherited flex sizing from earlier rules */
+    overflow: hidden;
+}
+
+/* Ensure image fills its column nicely */
+.photo-card__image .auto-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover; /* ensure consistent cropping without distortion */
+    border-radius: 8px;
+}
+
+/* Smaller image column for compact cards */
+.photo-card--compact { --thumb-width: 180px; }
+
+/* Responsive: stack on small screens */
+@media (max-width: 720px) {
+    .photo-card {
+        /* stack into a single column so image sits above metadata */
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+        align-items: center;
+    }
+    .photo-card__image {
+        width: 90%;
+        aspect-ratio: 4 / 5;
+    }
+    .photo-card__meta {
+        width: 100%;
+        text-align: left;
+        padding: 8px 12px;
+    }
+}
+
 /* Social Media Container */
 .social-media-container {
     display: flex;
@@ -341,6 +472,45 @@ body {
         align-self: start; /* ensure card aligns to top of grid cell */
         isolation: isolate; /* prevents blending/overflow stacking issues between cards */
 }
+
+/* Reusable site button — match existing site aesthetics */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: rgba(58, 9, 73, 0.6);
+    color: #e0e0e0;
+    border: 1px solid rgba(255,255,255,0.04);
+    cursor: pointer;
+    font-size: 14px;
+    transition: transform 160ms ease, background 200ms ease, box-shadow 200ms ease;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+}
+.btn:hover, .btn:focus {
+    transform: translateY(-3px);
+    background: rgba(80, 18, 98, 0.65);
+}
+.btn:active {
+    transform: translateY(0);
+}
+
+/* Photo controls small layout */
+.photo-controls {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+}
+.photo-controls .btn {
+    padding: 6px 8px;
+    font-size: 13px;
+    border-radius: 6px;
+}
+
+/* Keep social-media-button distinct but reuse variables if necessary */
 
 /* Container that lays out repo cards responsively */
 .repo-grid {
