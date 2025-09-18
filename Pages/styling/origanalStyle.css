@@ -212,8 +212,7 @@ body {
 /* Content Items */
 
 /* Image container with glassy border */
-.image-container {
-    float: right; /* Floats the image to the right of the text */
+.image-container { /* Floats the image to the right of the text */
     margin-left: 20px; /* Adds space between the image and text */
     padding: 10px; /* Padding will create space for the border */
     border-radius: 15px; /* Optional rounded corners */
@@ -223,6 +222,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for added depth */
     display: inline-block; /* Ensure the container behaves like a block element */
     max-width: 30%; /* The container will take up to 50% of the available width */
+    flex: 0 0 30%;
 }
 
 /* Image styling */
