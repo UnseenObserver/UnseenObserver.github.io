@@ -43,6 +43,7 @@ html, body {
         left: -220px;
     }
 
+    .hover-area:hover ~ .sidebar,
     .hover-area:hover + .sidebar {
         left: 10px;
     }
