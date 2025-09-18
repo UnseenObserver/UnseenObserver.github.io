@@ -321,7 +321,74 @@ body {
 
 /* End */
 
+/* GitHub Repo Card Styling  */
 
+/* Minimal styling for the repo card — change colors to match your site */
+.gh-repo-card {
+  font-family: Arial, sans-serif;
+  --card-bg: #1f1f2e;
+  --muted: #cfcfe0;
+  --accent: #7dd3fc;
+  width: 320px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
+  color: var(--muted);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+  padding: 12px;
+  box-sizing: border-box;
+}
+.gh-repo-card .header {
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.gh-repo-card .repo-name {
+  font-weight:700;
+  color:#fff;
+  font-size:16px;
+}
+.gh-repo-card .owner {
+  color:var(--muted);
+  font-size:13px;
+}
+.gh-repo-card .desc {
+  margin-top:8px;
+  font-size:13px;
+  color:var(--muted);
+  height:38px;
+  overflow:hidden;
+}
+.gh-repo-card .meta {
+  display:flex;
+  gap:12px;
+  margin-top:10px;
+  font-size:13px;
+  color:var(--muted);
+  align-items:center;
+}
+.gh-repo-card .meta .lang {
+  display:flex;
+  gap:6px;
+  align-items:center;
+}
+.gh-repo-card .lang .dot {
+  width:10px;height:10px;border-radius:50%;
+  background:#f472b6;
+  display:inline-block;
+}
+.gh-repo-card .skeleton {
+  background: linear-gradient(90deg,#2a2a36,#24242e,#2a2a36);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s linear infinite;
+  height: 12px;
+  border-radius: 6px;
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* End */
 
 
 
