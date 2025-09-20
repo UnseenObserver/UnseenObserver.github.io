@@ -1,52 +1,16 @@
-// photoMeta.js — enhanced EXIF metadata extraction with optional reverse-geocoding and caching
-// Features:
-// - Auto-extract EXIF Date/Time and GPS (if available)
-// - Optional reverse-geocoding using OpenStreetMap Nominatim (rate-limited)
-// - Per-card "Fetch metadata" and "Copy filename" buttons
-// - Caches EXIF + reverse-geocode results in localStorage keyed by image src
+// photoMeta.js - Simple photo gallery support
+// This file is kept as a placeholder for future photo metadata features
+// Currently it only manages basic photo gallery functionality
 
-const CONFIG = {
-  exifrCdn: 'https://unpkg.com/exifr/dist/full.umd.js',
-  reverseGeocode: false, // default off; controlled by the UI checkbox
-  cacheKeyPrefix: 'photoMeta:v1:',
-  nominatimEmail: '', // optional: set here if you have a contact email for Nominatim
-};
-
-async function loadExifr() {
-  if (window.exifr) return window.exifr;
-  await new Promise((resolve, reject) => {
-    const s = document.createElement('script');
-    s.src = CONFIG.exifrCdn;
-    s.async = true;
-    s.onload = resolve;
-    s.onerror = reject;
-    document.head.appendChild(s);
+document.addEventListener('DOMContentLoaded', () => {
+  // Basic image error handling
+  document.querySelectorAll('.photo-card__image img').forEach(img => {
+    img.onerror = () => {
+      img.src = 'assests/Images/placeholder.jpg';
+      img.alt = 'Image failed to load';
+    };
   });
-  return window.exifr;
-}
-
-function storageGet(key) {
-  try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : null } catch(e){ return null }
-}
-function storageSet(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); } catch(e){} }
-
-async function reverseGeocode(lat, lon) {
-  try {
-    const params = new URLSearchParams({ format: 'jsonv2', lat: lat, lon: lon });
-    if (CONFIG.nominatimEmail) params.set('email', CONFIG.nominatimEmail);
-    const url = `https://nominatim.openstreetmap.org/reverse?${params}`;
-    const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
-    if (!res.ok) return null;
-    const data = await res.json();
-    return data.display_name || null;
-  } catch (err) { return null; }
-}
-
-function formatTime(dt) {
-  if (!dt) return '';
-  const d = (dt instanceof Date) ? dt : new Date(dt);
-  return d.toLocaleString();
-}
+});
 
 function setFilenameEl(filenameEl, name) {
   if (!filenameEl) return;

@@ -10,7 +10,12 @@
     // Pages live under Pages/ so the fragment is in the same folder.
     const fragmentPath = 'sidebar.html';
 
-    fetch(fragmentPath)
+    // Add cache-busting query parameter during development
+    const devPath = fragmentPath + '?v=' + new Date().getTime();
+
+    fetch(devPath, {
+      cache: 'no-store' // Prevent caching during development
+    })
       .then(response => {
         if (!response.ok) throw new Error('Sidebar fragment not found');
         return response.text();

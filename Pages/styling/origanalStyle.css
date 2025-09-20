@@ -228,10 +228,11 @@ body {
 
 /* Image styling */
 .auto-image {
-    max-width: 100%; /* Ensure the image fits within its container */
+    width: 100%; /* Fill container width */
     height: auto; /* Maintain aspect ratio */
     border-radius: 8px; /* Optional: rounded corners for the image itself */
     display: block; /* Prevent the image from displaying inline with text */
+    object-fit: contain; /* Ensure image maintains aspect ratio */
 }
 
 /* Photo card: image on left, metadata on right */
@@ -268,9 +269,7 @@ body {
 .photo-card__image {
     /* make the image column fill the thumbnail grid column */
     width: 100%;
-    height: 100%;
     min-width: 120px;
-    aspect-ratio: 4 / 5;
     overflow: hidden;
 }
 
