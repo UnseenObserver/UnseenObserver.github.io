@@ -10,6 +10,25 @@ document.addEventListener('DOMContentLoaded', () => {
       img.alt = 'Image failed to load';
     };
   });
+
+  // convert any existing location text to links (keep the 'Location:' label)
+  document.querySelectorAll('.photo-location').forEach(el => {
+    const txt = el.textContent || '';
+    const marker = 'Location:';
+    if (txt.includes(marker)) {
+      const loc = txt.split(marker)[1].trim();
+      if (loc) {
+        const anchor = createLocationLink(loc);
+        // clear element and append label + link
+        el.textContent = '';
+        const strong = document.createElement('strong');
+        strong.textContent = marker;
+        el.appendChild(strong);
+        el.appendChild(document.createTextNode(' '));
+        el.appendChild(anchor);
+      }
+    }
+  });
 });
 
 function setFilenameEl(filenameEl, name) {
@@ -105,6 +124,59 @@ function applyMetadataToCard(card, meta) {
       card.querySelector('.photo-card__meta').appendChild(camEl);
     }
     camEl.textContent = ((meta.cameraMake||'') + ' ' + (meta.cameraModel||'')).trim();
+  }
+
+  // convert location text to link
+  const locEl = card.querySelector('.photo-location');
+  if (locEl) {
+    const txt = locEl.textContent || '';
+    if (txt.includes('Location:')) {
+      const loc = txt.split('Location:')[1].trim();
+      if (loc) locEl.replaceWith(createLocationLink(loc));
+    }
+  }
+}
+
+function createLocationLink(location) {
+  const a = document.createElement('a');
+  a.href = '#'; // placeholder; will be handled on click
+  a.textContent = location;
+  a.className = 'photo-location-link';
+  a.target = '_blank';
+  a.rel = 'noopener noreferrer';
+  a.addEventListener('click', (e) => {
+    e.preventDefault();
+    const loc = e.currentTarget.textContent || '';
+    const latLng = loc.split(',').map(Number);
+    if (latLng.length === 2 && !isNaN(latLng[0]) && !isNaN(latLng[1])) {
+      window.open(`https://www.google.com/maps?q=${latLng[0]},${latLng[1]}`, '_blank');
+    } else {
+      // geocode the address
+      geocodeAddress(loc).then(coords => {
+        if (coords && coords.length === 2) {
+          window.open(`https://www.google.com/maps?q=${coords[0]},${coords[1]}`, '_blank');
+        } else {
+          alert('Unable to find location on map: ' + loc);
+        }
+      }).catch(err => { console.error('geocode failed', err); alert('Unable to find location on map: ' + loc); });
+    }
+  });
+  return a;
+}
+
+// Simple forward geocode using Nominatim (lightweight, rate-limited)
+async function geocodeAddress(query) {
+  try {
+    const params = new URLSearchParams({ q: query, format: 'jsonv2', limit: 1 });
+    const url = `https://nominatim.openstreetmap.org/search?${params}`;
+    const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
+    if (!res.ok) return null;
+    const data = await res.json();
+    if (!data || !data.length) return null;
+    const first = data[0];
+    return [parseFloat(first.lat), parseFloat(first.lon)];
+  } catch (err) {
+    return null;
   }
 }
 

@@ -256,14 +256,20 @@ body {
     -webkit-backdrop-filter: blur(10px);
 }
 
-/* Gallery container: allow cards to wrap into columns */
+/* Gallery container: fixed 2-column grid */
 .photo-gallery {
     display: grid;
     gap: 18px;
-    /* configurable minimum card width to avoid overly wide text lines */
-    --card-min-width: 300px;
-    grid-template-columns: repeat(auto-fit, minmax(var(--card-min-width), 1fr));
+    grid-template-columns: repeat(2, 1fr);
     align-items: start;
+    max-width: 100%;
+}
+
+/* Make it single column on very small screens */
+@media (max-width: 600px) {
+    .photo-gallery {
+        grid-template-columns: 1fr;
+    }
 }
 
 .photo-card__image {
@@ -292,20 +298,21 @@ body {
 }
 
 .photo-title {
-    font-size: 16px; /* smaller title */
-    margin-bottom: 6px;
+    font-size: 14px; /* even smaller title */
+    margin-bottom: 4px;
+    font-weight: 600;
 }
 
 .photo-description {
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     color: #dcdcdc;
-    font-size: 13px; /* reduced description size */
+    font-size: 12px; /* smaller description size */
 }
 
 .photo-location, .photo-filename {
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     color: #cfcfe0;
-    font-size: 12px; /* compact metadata text */
+    font-size: 11px; /* smaller metadata text */
 }
 
 /* Compact modifier: for denser grids */
