@@ -517,6 +517,47 @@ body {
     border-radius: 6px;
 }
 
+/* Download button specifically for photo cards */
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    font-size: 13px;
+    border-radius: 6px;
+    background: rgba(20, 80, 60, 0.6);
+    color: #e0e0e0;
+    border: 1px solid rgba(255,255,255,0.04);
+    text-decoration: none;
+}
+.download-btn:hover { background: rgba(30, 110, 80, 0.7); }
+
+/* Download toast/indicator */
+.download-toast {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    background: rgba(20,20,20,0.9);
+    color: #e0e0e0;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+    transition: opacity 220ms cubic-bezier(.2,.9,.2,1), transform 220ms cubic-bezier(.2,.9,.2,1);
+    pointer-events: none;
+}
+.download-toast.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.download-toast .dot {
+    display:inline-block; width:8px; height:8px; margin-right:8px; border-radius:50%; background:#5ee6a1; box-shadow:0 0 8px rgba(94,230,161,0.6);
+}
+
 /* Keep social-media-button distinct but reuse variables if necessary */
 
 /* Container that lays out repo cards responsively */

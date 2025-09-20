@@ -29,6 +29,18 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   });
+
+  // replace filename text with download buttons
+  document.querySelectorAll('.photo-card').forEach(card => {
+    const fileEl = card.querySelector('.photo-filename');
+    const img = card.querySelector('img');
+    if (fileEl && img) {
+      const dl = createDownloadLink(img);
+      fileEl.parentNode.replaceChild(dl, fileEl);
+      // wire download behavior
+      wireDownloadBehavior(card);
+    }
+  });
 });
 
 function setFilenameEl(filenameEl, name) {
@@ -96,7 +108,17 @@ function applyMetadataToCard(card, meta) {
   let timeEl = card.querySelector('.photo-time');
 
   // filename
-  try { const name = (meta.src||'').split('/').pop() || meta.src; setFilenameEl(filenameEl, name); } catch(e){}
+  try {
+    const name = (meta.src||'').split('/').pop() || meta.src;
+    // replace filename element with download button
+    if (filenameEl) {
+      const img = card.querySelector('img');
+      const dl = createDownloadLink(img, name);
+      filenameEl.parentNode.replaceChild(dl, filenameEl);
+      // wire download behavior for this card
+      wireDownloadBehavior(card);
+    }
+  } catch(e){}
 
   // time
   if (meta.time) {
@@ -135,6 +157,70 @@ function applyMetadataToCard(card, meta) {
       if (loc) locEl.replaceWith(createLocationLink(loc));
     }
   }
+}
+
+function createDownloadLink(imgEl, filename) {
+  const a = document.createElement('a');
+  a.className = 'download-btn';
+  const src = imgEl?.getAttribute('src') || imgEl?.src || '#';
+  a.href = src;
+  if (filename) a.setAttribute('download', filename);
+  else a.setAttribute('download', '');
+  a.textContent = 'Download';
+  a.title = 'Download image';
+  return a;
+}
+
+// Attach enhanced download behavior to a download button inside a card
+function wireDownloadBehavior(card) {
+  const dl = card.querySelector('.download-btn');
+  if (!dl) return;
+  // avoid wiring twice
+  if (dl.dataset.wired) return;
+  dl.dataset.wired = '1';
+  dl.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const img = card.querySelector('img');
+    if (!img) return;
+    const src = img.getAttribute('src') || img.src;
+    const suggested = dl.getAttribute('download') || (src.split('/').pop() || 'image');
+
+    // show toast
+    let toast = card.querySelector('.download-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.className = 'download-toast';
+      toast.innerHTML = '<span class="dot"></span><span class="msg">Preparing download...</span>';
+      card.appendChild(toast);
+    }
+    const msg = toast.querySelector('.msg');
+    toast.classList.add('show');
+
+    // try fetching as blob to trigger a real download with filename
+    try {
+      const res = await fetch(src, { cache: 'no-store' });
+      if (!res.ok) throw new Error('fetch failed');
+      const blob = await res.blob();
+      const blobUrl = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = blobUrl;
+      a.download = suggested;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(blobUrl);
+      msg.textContent = 'Download started';
+    } catch (err) {
+      // fallback: open the image in new tab so user can save it
+      window.open(src, '_blank');
+      msg.textContent = 'Opened image in new tab';
+    }
+
+    // hide toast after a delay
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 2200);
+  });
 }
 
 function createLocationLink(location) {
