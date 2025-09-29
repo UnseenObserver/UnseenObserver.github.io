@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Games</title>
+    <link rel="stylesheet" href="styling/origanalStyle.css">
+</head>
+<body>
+
+    <!-- Sidebar placeholder: sidebar will be loaded from Pages/sidebar.html -->
+    <div id="sidebar-container"></div>
+
+    <!-- About Me Content Section -->
+    <div class="main-content-container">
+        <div class="main-content">
+            <h1>Games</h1>
+            <p>This is a place for me to make little games and show them to you.</p>
+                <!-- Games grid: responsive buttons that include a thumbnail, title and reveal a description on hover -->
+                <section class="games-grid" aria-label="Games list">
+                    <a class="game-button" href="Games/sampleGame.html">
+                        <div class="game-thumb">
+                            <img src="assests/Images/mainSelfPortrait0924.jpg" alt="Sample game thumbnail">
+                        </div>
+                        <div class="game-info">
+                            <h3 class="game-title">Sample Game</h3>
+                            <div class="game-meta">A tiny demo game</div>
+                        </div>
+                        <div class="game-desc">Click to open the sample game. Hovering over this card will slide this description up from the bottom so you can read more about the game.</div>
+                    </a>
+                </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+     <footer class="footer">
+        <p>&copy; 
+        <span id="year"></span> Charlotte Pawloski. All rights reserved.</p>
+        <a href="senWebContact.html">Contact Me</a>
+    </footer>
+
+    <script src="Java/time.js"></script> <!-- Link to your JavaScript file -->
+
+    <script src="Java/loadSidebar.js"></script>
+    <script src="Java/sidebar.js"></script> <!-- Link to your JavaScript file -->
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Sample Game</title>
+    <link rel="stylesheet" href="../styling/origanalStyle.css">
+</head>
+<body>
+    <div id="sidebar-container"></div>
+
+    <div class="main-content-container">
+        <div class="main-content">
+            <h1>Sample Game</h1>
+            <p>This is the sample game page. It demonstrates the linked game and includes the shared sidebar.</p>
+
+            <div id="game-container">
+                <button id="start-button">Start Color Clicker</button>
+                <div id="score">Score: <span id="score-val">0</span></div>
+                <div id="color-box"></div>
+            </div>
+
+            <p><a class="btn" href="../senWebGames.html">Back to Games</a></p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; <span id="year"></span> Charlotte Pawloski. All rights reserved.</p>
+        <a href="../senWebContact.html">Contact Me</a>
+    </footer>
+
+    <script>
+        // Override sidebar path for pages in subfolders so loader finds the fragment
+        window.__sidebarPath = '../sidebar.html';
+    </script>
+    <script src="../Java/loadSidebar.js"></script>
+    <script src="../Java/sidebar.js"></script>
+    <script src="../Java/time.js"></script>
+    <script src="Scripts/sample-game/sampleGame.js"></script>
+</body>
+</html>

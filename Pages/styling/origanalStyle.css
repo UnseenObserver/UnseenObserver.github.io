@@ -702,3 +702,75 @@ body {
 }
 
 /* End */
+
+
+/* Game Button Styles */
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+    margin-top: 18px;
+}
+
+.game-button {
+    --card-bg: rgba(40, 29, 61, 0.45);
+    display: block;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 12px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
+    box-shadow: 0 8px 22px rgba(0,0,0,0.5);
+    transition: transform 200ms ease, box-shadow 200ms ease;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 84px;
+}
+
+.game-button:hover { transform: translateY(-6px); box-shadow: 0 18px 36px rgba(0,0,0,0.6); }
+
+.game-thumb {
+    flex: 0 0 84px;
+    width: 84px;
+    height: 84px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.03);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.game-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.game-info { flex: 1 1 auto; text-align: left; }
+.game-title { font-size: 16px; color: #fff; margin-bottom: 4px; }
+.game-meta { font-size: 13px; color: #cfcfe0; }
+
+/* Sliding description that grows from the bottom on hover */
+.game-desc {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: translateY(100%);
+    background: linear-gradient(180deg, rgba(20,20,20,0.0), rgba(20,20,20,0.9));
+    color: #e0e0e0;
+    padding: 12px;
+    font-size: 13px;
+    transition: transform 260ms ease;
+    pointer-events: none;
+}
+
+.game-button:hover .game-desc,
+.game-button:focus-within .game-desc { transform: translateY(0%); pointer-events: auto; }
+
+/* Make the thumbnail and grid responsive on narrow screens */
+@media (max-width: 520px) {
+    .game-button { align-items: flex-start; gap: 10px; }
+    .game-thumb { width: 72px; height: 72px; flex: 0 0 72px; }
+}
+
+/* End Game Button Styles */

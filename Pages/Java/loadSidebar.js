@@ -6,9 +6,10 @@
     const container = document.getElementById('sidebar-container');
     if (!container) return;
 
-    // Determine path to fragment relative to current page.
-    // Pages live under Pages/ so the fragment is in the same folder.
-    const fragmentPath = 'sidebar.html';
+  // Determine path to fragment. By default it's 'sidebar.html' relative to the current page.
+  // Pages in subfolders can set `window.__sidebarPath = '../sidebar.html'` (or an absolute path)
+  // before this script loads to override the default.
+  const fragmentPath = (window && window.__sidebarPath) ? window.__sidebarPath : 'sidebar.html';
 
     // Add cache-busting query parameter during development
     const devPath = fragmentPath + '?v=' + new Date().getTime();
